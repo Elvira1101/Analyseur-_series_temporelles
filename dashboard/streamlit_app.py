@@ -10,6 +10,12 @@ from src.anomalies import zscore_anomalies
 from src.models import train_prophet, predict_prophet, decompose_prophet, load_model
 import joblib
 import plotly.graph_objects as go
+# Indiquer si sklearn est dispo
+try:
+    import sklearn  # juste pour tester présence
+    SKLEARN_AVAILABLE = True
+except Exception:
+    SKLEARN_AVAILABLE = False
 
 st.set_page_config(layout="wide")
 st.title("📊 Analyseur Séries Temporelles - Retail Store Inventory")

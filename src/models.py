@@ -1,5 +1,5 @@
 # src/models.py
-from prophet import Prophet
+from prophet_light import Prophet
 import joblib, os
 import pandas as pd
 from typing import Tuple

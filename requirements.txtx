@@ -1,0 +1,13 @@
+pandas
+numpy
+matplotlib
+scikit-learn
+statsmodels
+prophet
+streamlit
+plotly
+fastapi
+uvicorn
+joblib
+pytest
+paho-mqtt   # si besoin ingestion MQTT

@@ -10,4 +10,4 @@ fastapi
 uvicorn
 joblib
 pytest
-paho-mqtt   # si besoin ingestion MQTT
+paho-mqtt  

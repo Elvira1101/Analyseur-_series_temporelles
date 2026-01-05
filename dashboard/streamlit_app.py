@@ -18,7 +18,7 @@ except Exception:
     SKLEARN_AVAILABLE = False
 
 st.set_page_config(layout="wide")
-st.title("📊 Analyseur Séries Temporelles - Retail Store Inventory")
+st.title(" Analyseur Séries Temporelles - Retail Store Inventory")
 
 # Upload or default file
 uploaded = st.file_uploader("Upload CSV (Date + Inventory Level or ds + y + Category)", type=['csv'])

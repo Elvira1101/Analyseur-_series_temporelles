@@ -1,5 +1,5 @@
 # src/models.py
-from prophet_light import Prophet
+from prophet import Prophet # pyright: ignore[reportMissingImports]
 import joblib, os
 import pandas as pd
 from typing import Tuple

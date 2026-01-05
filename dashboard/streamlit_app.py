@@ -2,7 +2,7 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-import streamlit as st
+import streamlit as st # pyright: ignore[reportMissingImports]
 import pandas as pd
 from src.etl import load_csv
 from src.preprocessing import ensure_freq, impute_missing, cap_outliers_iqr, normalize

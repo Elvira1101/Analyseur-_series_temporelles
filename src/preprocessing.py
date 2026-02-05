@@ -32,11 +32,11 @@ def impute_missing(df: pd.DataFrame, method: str='interpolate') -> pd.DataFrame:
     """
     df = df.copy()
     if method == 'interpolate':
-        df['y'] = df['y'].interpolate()
+        df['y'] = df['y'].interpolate().ffill().bfill()
     elif method == 'ffill':
-        df['y'] = df['y'].fillna(method='ffill')
+        df['y'] = df['y'].ffill()
     elif method == 'bfill':
-        df['y'] = df['y'].fillna(method='bfill')
+        df['y'] = df['y'].bfill()
     elif method == 'zero':
         df['y'] = df['y'].fillna(0)
     else:

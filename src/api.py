@@ -1,4 +1,4 @@
-# src/api.py
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
@@ -27,5 +27,5 @@ def forecast(req: ForecastRequest):
     if model is None:
         return {"error":"model not found, train first"}
     fc = predict_prophet(model, periods=req.periods, freq=req.freq)
-    # convert to records for JSON
+   
     return fc.to_dict(orient='records')

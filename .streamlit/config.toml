@@ -1,0 +1,27 @@
+[server]
+enableStaticServing = true
+
+[theme]
+base = "light"
+
+[global]
+disableWatchdogWarning = true
+
+[runner]
+magicEnabled = false
+
+[client]
+showErrorDetails = true
+
+[logger]
+level = "info"
+
+[deprecation]
+showfileUploaderEncoding = false
+
+[ui]
+hideTopBar = false
+
+[chart]
+# 👇 LA CLÉ
+enableAltair = false

@@ -167,7 +167,10 @@ def prepare_time_series(df: pd.DataFrame, ts_col: Optional[str] = None, value_co
         df = df.dropna(subset=['ds']).sort_values('ds').reset_index(drop=True)
     else:
         df = df.reset_index(drop=True)
-        df['ds'] = pd.date_range(end=pd.Timestamp.today(), periods=len(df), freq='D')
+        try:
+            df['ds'] = pd.date_range(end=pd.Timestamp.today(), periods=len(df), freq='D')
+        except Exception as e:
+            raise ValueError(f"Le jeu de données est trop grand ({len(df)} lignes) pour générer des dates factices automatiquement. Veuillez impérativement spécifier une colonne Date valide.")
 
     # detect or use value column
     if value_col:

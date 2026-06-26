@@ -4,11 +4,7 @@ import numpy as np
 from sklearn.ensemble import IsolationForest
 
 def zscore_anomalies(df: pd.DataFrame, col: str='y', threshold: float=3.0) -> pd.DataFrame:
-    """Compute z-score anomalies safely.
-
-    For small or constant series, returns the DataFrame with 'z' and 'anomaly_z'
-    columns set to 0/False to avoid breaking downstream code.
-    """
+    
     df = df.copy()
     # ensure numeric
     s = pd.to_numeric(df[col], errors='coerce')
@@ -22,7 +18,7 @@ def zscore_anomalies(df: pd.DataFrame, col: str='y', threshold: float=3.0) -> pd
     std = valid.std()
     df['z'] = (s - mean) / (std if std != 0 else 1.0)
     df['anomaly_z'] = df['z'].abs() > threshold
-   
+
     df['anomaly_z'] = df['anomaly_z'].fillna(False).astype(bool)
     return df
 

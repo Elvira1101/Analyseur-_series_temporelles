@@ -4,7 +4,7 @@ import joblib, os
 import pandas as pd
 from typing import Tuple
 
-MODELS_DIR = "models"
+MODELS_DIR = "saved_models"
 
 def train_prophet(df: pd.DataFrame, save_name: str='prophet_model.joblib') -> Tuple[Prophet, str]:
     # Basic validation to provide clearer error messages

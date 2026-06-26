@@ -2,7 +2,7 @@ version: "3.8"
 services:
   api:
     build: .
-    command: uvicorn src.api:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn app.controllers.api_controller:app --host 0.0.0.0 --port 8000 --reload
     ports:
       - "8000:8000"
     volumes:
@@ -10,7 +10,7 @@ services:
 
   streamlit:
     build: .
-    command: streamlit run dashboard/streamlit_app.py --server.port 8501 --server.address 0.0.0.0
+    command: streamlit run app/views/dashboard_view.py --server.port 8501 --server.address 0.0.0.0
     ports:
       - "8501:8501"
     volumes:

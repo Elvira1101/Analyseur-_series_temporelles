@@ -23,7 +23,21 @@ def ensure_freq(df: pd.DataFrame, freq: str='D', ts_col: str='ds', value_col: st
         df = df.groupby(ts_col)[value_col].mean().reset_index()
 
     df = df.set_index(ts_col).sort_index()
-    df = df.asfreq(freq)  # remplit les trous (index DatetimeIndex)
+    
+    if len(df) >= 2:
+        # Vérification d'une plage de dates aberrante (ex: dates négatives ou > 100 ans)
+        try:
+            date_range_days = (df.index.max() - df.index.min()).days
+            if date_range_days > 365 * 100:
+                raise ValueError("La plage de dates détectée est trop grande (> 100 ans). Veuillez vérifier que vous avez sélectionné la bonne colonne Date.")
+        except AttributeError:
+            pass # fallback si pas de .days
+            
+    try:
+        df = df.asfreq(freq)  # remplit les trous (index DatetimeIndex)
+    except Exception as e:
+        raise ValueError(f"Impossible d'appliquer la fréquence '{freq}' aux dates. Vérifiez la colonne Date. Détail : {e}")
+        
     return df.reset_index()
 
 def impute_missing(df: pd.DataFrame, method: str='interpolate') -> pd.DataFrame:

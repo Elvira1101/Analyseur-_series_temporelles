@@ -3,12 +3,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
 import pandas as pd
-from src.models import predict_prophet, load_model
+from app.models.ml.prophet_model import predict_prophet, load_model
 import os
 
 app = FastAPI(title="Forecast API")
 
-MODEL_PATH = os.path.join("models", "prophet_model.joblib")
+MODEL_PATH = os.path.join("saved_models", "prophet_model.joblib")
 model = None
 if os.path.exists(MODEL_PATH):
     model = load_model(MODEL_PATH)

@@ -1,4 +1,4 @@
-# dashboard/streamlit_app.py
+# app/views/dashboard_view.py
 import sys
 import os
 import pandas as pd
@@ -6,13 +6,13 @@ import streamlit as st
 import importlib
 
 # Setup path for internal imports
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 # Import ETL and other modules
-from src.etl import read_raw_csv, prepare_time_series, auto_fix_time_series
-from src.preprocessing import ensure_freq, impute_missing, cap_outliers_iqr, normalize
-from src.anomalies import zscore_anomalies
-from src.models import train_prophet, predict_prophet, decompose_prophet, load_model
+from app.models.data_processing.etl import read_raw_csv, prepare_time_series, auto_fix_time_series
+from app.models.data_processing.preprocessing import ensure_freq, impute_missing, cap_outliers_iqr, normalize
+from app.models.ml.anomalies import zscore_anomalies
+from app.models.ml.prophet_model import train_prophet, predict_prophet, decompose_prophet, load_model
 
 # --- Helper Functions for Plots ---
 try:
@@ -28,8 +28,7 @@ def plot_anomalies(df, key=None):
         fig.add_trace(go.Scatter(x=df['ds'], y=df['y'], mode='lines', name='Valeur'))
         if 'anomaly_z' in df.columns:
             anom = df[df['anomaly_z']]
-            fig.add_trace(go.Scatter(x=anom['ds'], y=anom['y'],
-                                     mode='markers', name='Anomalies', marker=dict(color='red', size=8)))
+            fig.add_trace(go.Scatter(x=anom['ds'], y=anom['y'], mode='markers', name='Anomalies', marker=dict(color='red', size=8)))
         fig.update_layout(template="plotly_dark", margin=dict(l=0, r=0, t=30, b=0))
         st.plotly_chart(fig, use_container_width=True, key=key)
     else:
